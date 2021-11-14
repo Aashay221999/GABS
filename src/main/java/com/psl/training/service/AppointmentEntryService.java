@@ -7,15 +7,18 @@ import org.springframework.stereotype.Service;
 import com.psl.training.entity.AppointmentCalendar;
 import com.psl.training.entity.AppointmentEntry;
 import com.psl.training.entity.User;
+import com.psl.training.repository.AppointmentCalendarRepository;
 import com.psl.training.repository.AppointmentEntryRepository;
 import com.psl.training.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
 public class AppointmentEntryService {
 	
-
+    @Autowired
+	AppointmentCalendarRepository repositoryAC;
 	@Autowired
 	AppointmentEntryRepository repositoryAE ;
 	@Autowired
@@ -43,6 +46,7 @@ public class AppointmentEntryService {
 	{
 		//return new object which is not found
 		return repositoryAE.findById(aeID).orElseThrow(IllegalArgumentException::new);
+		
 	}
 	
 	public void deleteAppointmentEntryById(long aeID) {
@@ -58,4 +62,55 @@ public class AppointmentEntryService {
 		User owner = repositoryU.findById(owner_id).orElseThrow(IllegalArgumentException::new);
 		return repositoryAE.findByOwner(owner);
 	}	
+	
+	
+//	public List <Integer> getAppointmentByNameDate(LocalDate dt, long acid){
+//		System.out.println(dt);
+//		List<Integer> lst = repositoryAE.getAppointmentEntryByNameDate(dt, acid);
+//		List<Integer> newlst=new ArrayList<Integer>();
+//		for(int i=0;i<8;i++) {
+//			if(!lst.contains(i)) {
+//				newlst.add(i);
+//			}
+//		}
+//		return newlst;
+//	}
+//	
+	
+	public List <Integer> getAllUnbookedAppointment(String dt, long acid){
+		System.out.println(dt);
+		List<Integer> lst = repositoryAE.getAllUnbookedAppointment(dt, acid);
+		List<Integer> newlst=new ArrayList<Integer>();
+		for(int i=0;i<8;i++) {
+			if(!lst.contains(i)) {
+				newlst.add(i);
+			}
+		}
+		return newlst;
+	}
+		
+	
+	
+	
+	public List<AppointmentCalendar> getAllAppointment(String text,String type){
+		
+		if(type.equals("ByType")) {
+			return repositoryAC.findByType(text);
+		}
+		else if(type.equals("ByLocation")) {
+			
+			return repositoryAC.findByLocation(text);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

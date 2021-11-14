@@ -42,10 +42,20 @@ public class AppointmentCalendarController {
 	@GetMapping("/ac")
 	public List<AppointmentCalendar> getAppointmentCalendarsByUserID(@RequestBody Map<String, Long> payload)
 	{
-		//System.out.println(payload.get("userID"));
+		
+		System.out.println(payload.get("userID"));
 		return serviceAC.getAppointmentCalendarByUserID(payload.get("userID"));
 
 	}
+	
+//	@GetMapping("/ac")
+//	public String getAppointmentCalendarsByUserID(@RequestBody String payload)
+//	{
+//		
+//		//System.out.println(payload.get("userID"));
+//		return payload;
+//
+//	}	
 	
 	
 	
