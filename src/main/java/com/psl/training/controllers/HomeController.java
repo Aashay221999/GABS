@@ -21,11 +21,18 @@ public class HomeController {
 	}
 	
 	
+//	
+//	@GetMapping("/home/{aeid}")
+//	public AppointmentEntry getAppointmentEntryById(@RequestBody long aeid ){
+//		return serviceAE.getAppointmentEntryById(aeid);
+//	}
+//}
 	
-	@GetMapping("/home")
-	public AppointmentEntry getAppointmentEntryById(@RequestBody long aeid){
+	
+	
+	@GetMapping("/home/{aeid}")
+	public AppointmentEntry getAppointmentEntryById(@PathVariable("aeid") long aeid){
 		return serviceAE.getAppointmentEntryById(aeid);
 	}
 }
-	
 	

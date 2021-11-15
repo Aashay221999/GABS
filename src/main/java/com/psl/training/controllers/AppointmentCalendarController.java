@@ -44,6 +44,7 @@ public class AppointmentCalendarController {
 	@GetMapping("/ac/{userID}")
 	public List<AppointmentCalendar> getAppointmentCalendarsByUserID(@PathVariable("userID") long userID)
 	{
+
 		User owner = serviceU.findByUserID(userID);
 		
 		return serviceAC.getAppointmentCalendarByUserID(owner.getUserID());
@@ -68,7 +69,7 @@ public class AppointmentCalendarController {
 	{
 		return serviceAE.getSpecificAppointmentEntry(acID, false);
 	}
-	
+
 	@PutMapping("ac/{acID}/approve/{aeID}")
 	public String approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
