@@ -30,6 +30,9 @@ public class AppointmentEntry implements Serializable {
 	@JoinColumn(name="acID", nullable=false)
 	private AppointmentCalendar appointmentCalendar;
 	
+	@Column(name = "acID", insertable = false, updatable=false, nullable = false)
+	private String appointmentCalendarID;
+	
 	@JsonBackReference(value="myOwnedAe")
 	@ManyToOne
 	@JoinColumn(name="owner_id", nullable=false, insertable=true, updatable=false, referencedColumnName="username")
@@ -37,7 +40,6 @@ public class AppointmentEntry implements Serializable {
 
 	@Column(name = "owner_id", insertable = false, updatable=false, nullable = false)
 	private String ownerid;
-	
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(nullable = false)
@@ -56,22 +58,6 @@ public class AppointmentEntry implements Serializable {
 	
 	@Column(name = "apointee_id", insertable = false, updatable=false, nullable = false)
 	private String apointeeid;
-	
-	public String getOwnerid() {
-		return ownerid;
-	}
-
-	public void setOwnerid(String ownerid) {
-		this.ownerid = ownerid;
-	}
-
-	public String getApointeeid() {
-		return apointeeid;
-	}
-
-	public void setApointeeid(String apointeeid) {
-		this.apointeeid = apointeeid;
-	}
 
 	@Column(nullable = false)
 	private String description;
@@ -94,6 +80,30 @@ public class AppointmentEntry implements Serializable {
 		this.description = description;
 	}
 
+	public String getAppointmentCalendarID() {
+		return appointmentCalendarID;
+	}
+
+	public void setAppointmentCalendarID(String appointmentCalendarID) {
+		this.appointmentCalendarID = appointmentCalendarID;
+	}
+	
+	public String getOwnerid() {
+		return ownerid;
+	}
+
+	public void setOwnerid(String ownerid) {
+		this.ownerid = ownerid;
+	}
+
+	public String getApointeeid() {
+		return apointeeid;
+	}
+
+	public void setApointeeid(String apointeeid) {
+		this.apointeeid = apointeeid;
+	}
+	
 	public long getAeID() {
 		return aeID;
 	}
