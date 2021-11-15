@@ -19,26 +19,14 @@ public class UserController {
 	@Autowired
 	UserService serviceU;
 	
-	@GetMapping("/admin")
-	public List<User> getUsers()
-	{
-		return serviceU.getAllUsers();
-	}
 	
-	@DeleteMapping("/admin/{userID}")
-	public String deleteUser(@PathVariable("userID") long userID)
-	{
-		serviceU.deleteUserById(userID);
-		return "User Deleted Succesfully";
-	}
-	
-	@GetMapping("/admin/{userID}")
+	@GetMapping("/user/{userID}")
 	public User getUserDetails(@PathVariable("userID") long userID)
 	{
 		return serviceU.findByUserID(userID);
 	}
 	
-	@PutMapping("/users/{userID}")
+	@PutMapping("/user/{userID}")
 	public String updateUser(@RequestBody User user)
 	{
 		serviceU.updateUser(user);

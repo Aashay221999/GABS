@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,24 +41,49 @@ public class AppointmentCalendarController {
 		return "Appoinment Calendar Inserted";
 	}
 	
-	@GetMapping("/ac")
-	public List<AppointmentCalendar> getAppointmentCalendarsByUserID(@RequestBody Map<String, Long> payload)
+	@GetMapping("/ac/{userID}")
+	public List<AppointmentCalendar> getAppointmentCalendarsByUserID(@PathVariable("userID") long userID)
 	{
+
+		User owner = serviceU.findByUserID(userID);
 		
-		System.out.println(payload.get("userID"));
-		return serviceAC.getAppointmentCalendarByUserID(payload.get("userID"));
+		return serviceAC.getAppointmentCalendarByUserID(owner.getUserID());
 
 	}
 	
-//	@GetMapping("/ac")
-//	public String getAppointmentCalendarsByUserID(@RequestBody String payload)
-//	{
-//		
-//		//System.out.println(payload.get("userID"));
-//		return payload;
-//
-//	}	
+	@DeleteMapping("ac/{acid}")
+	public String deleteAppointmentCalendar(@PathVariable("acID") long acID)
+	{
+		serviceAC.deleteAppointmentCalendarById(acID);
+		return "Delete Appointment Calendar";
+	}
 	
+	@GetMapping("ac/{acid}/approved")
+	public List<AppointmentEntry> getApprovedAppointmentEntitiesByAcID(@PathVariable("acID") long acID)
+	{
+		return serviceAE.getSpecificAppointmentEntry(acID, true);
+	}
 	
+	@GetMapping("ac/{acID}/notapproved")
+	public List<AppointmentEntry> getNotApprovedAppointmentEntitiesByAcID(@PathVariable("acID") long acID)
+	{
+		return serviceAE.getSpecificAppointmentEntry(acID, false);
+	}
+
+	@PutMapping("ac/{acID}/approve/{aeID}")
+	public String approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
+	{
+		AppointmentEntry appointmentEntry = serviceAE.getAppointmentEntryById(aeID);
+		appointmentEntry.setIsApproved(true);
+		serviceAE.updateAppointmentEntry(appointmentEntry);
+		return "Appointment is Approved";
+	}
+	
+	@DeleteMapping("ac/{acID}/reject/{aeID}")
+	public String rejectAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
+	{
+		serviceAE.deleteAppointmentEntryById(aeID);
+		return "Appointment Entry is Deleted";
+	}
 	
 }

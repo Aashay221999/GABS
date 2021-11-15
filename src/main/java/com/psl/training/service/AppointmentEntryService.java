@@ -29,13 +29,14 @@ public class AppointmentEntryService {
 		return ae;
 	}
 	
+	
 	public void approveAppointmentEntry(AppointmentEntry ae) {
 		repositoryAE.save(ae);
 		
 	}
-	public List<AppointmentEntry> getSpecificAppointmentEntry(long owner_id, Boolean isApproved) {
-		User owner = repositoryU.findById(owner_id).orElseThrow(IllegalArgumentException::new);
-		return repositoryAE.findSpecificAppointmentEntry(owner,isApproved);
+	public List<AppointmentEntry> getSpecificAppointmentEntry(long acID, Boolean isApproved) {
+		
+		return repositoryAE.findSpecificAppointmentEntry(acID,isApproved);
 	}
 
 	public List<AppointmentEntry> getAppointmentEntry() { // Checking if everything is working
