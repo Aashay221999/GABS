@@ -1,5 +1,6 @@
 package com.psl.training.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -12,11 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Users", uniqueConstraints = {@UniqueConstraint(columnNames = {"userID", "userName", "mobileNumber"})})
-public class User {
+public class User implements Serializable {
 	
 		@Id
 		@Column(nullable = false)
@@ -36,19 +38,24 @@ public class User {
 		private String email;
 		
 		@Column(nullable = false)
-		private boolean isAdmin;
+		private Boolean isAdmin;
 		
 		@Column(nullable = false)
 		private String password; 
 		
-		@JsonManagedReference
+		@JsonManagedReference(value="myBookedAe")
+		//@JsonIgnoreProperties({"owner", "apointee"})
 		@OneToMany(mappedBy = "appointee")
 		private Set<AppointmentEntry> appointmentEntries;
 		
-		@JsonManagedReference
+		@JsonManagedReference(value="myac")
+		//@JsonIgnoreProperties({"owner"})
 		@OneToMany(mappedBy = "owner")
 		private Set<AppointmentCalendar> appointmentCalendars;
 		
+		@JsonManagedReference(value="myOwnedAe")
+		@OneToMany(mappedBy = "owner")
+		private Set<AppointmentEntry> appointmentEntriesOwnedByMe;
 		
 		public  User() {
 			
@@ -56,7 +63,7 @@ public class User {
 
 		public User(long userID, String userName, String mobileNumber, LocalDate doB, String email, boolean isAdmin,
 				String password, Set<AppointmentEntry> appointmentEntries,
-				Set<AppointmentCalendar> appointmentCalendars) {
+				Set<AppointmentCalendar> appointmentCalendars,Set<AppointmentEntry> appointmentEntriesOwnedByMe) {
 			super();
 			this.userID = userID;
 			this.userName = userName;
@@ -66,7 +73,16 @@ public class User {
 			this.isAdmin = isAdmin;
 			this.password = password;
 			this.appointmentEntries = appointmentEntries;
+			this.appointmentEntriesOwnedByMe = appointmentEntriesOwnedByMe;
 			this.appointmentCalendars = appointmentCalendars;
+		}
+
+		public Set<AppointmentEntry> getAppointmentEntriesOwnedByMe() {
+			return appointmentEntriesOwnedByMe;
+		}
+
+		public void setAppointmentEntriesOwnedByMe(Set<AppointmentEntry> appointmentEntriesOwnedByMe) {
+			this.appointmentEntriesOwnedByMe = appointmentEntriesOwnedByMe;
 		}
 
 		public long getUserID() {
@@ -119,12 +135,12 @@ public class User {
 		}
 
 
-		public boolean isAdmin() {
+		public Boolean getIsAdmin() {
 			return isAdmin;
 		}
 
 
-		public void setAdmin(boolean isAdmin) {
+		public void setIsAdmin(Boolean isAdmin) {
 			this.isAdmin = isAdmin;
 		}
 

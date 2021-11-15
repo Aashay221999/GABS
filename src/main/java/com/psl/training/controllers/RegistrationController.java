@@ -15,9 +15,10 @@ public class RegistrationController {
 	@Autowired
 	UserService serviceU;
 	
-	@PostMapping("/reg")
+	@PostMapping(value="/reg", consumes={"application/json"})
 	public String insertUser(@RequestBody User user)
-	{
+	{	
+		
 		serviceU.insertUser(user);
 		return "User Inserted";
 	}
