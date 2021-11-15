@@ -64,30 +64,21 @@ public class AppointmentEntryService {
 		return repositoryAE.findByOwner(owner);
 	}	
 	
-	
-//	public List <Integer> getAppointmentByNameDate(LocalDate dt, long acid){
-//		System.out.println(dt);
-//		List<Integer> lst = repositoryAE.getAppointmentEntryByNameDate(dt, acid);
-//		List<Integer> newlst=new ArrayList<Integer>();
-//		for(int i=0;i<8;i++) {
-//			if(!lst.contains(i)) {
-//				newlst.add(i);
-//			}
-//		}
-//		return newlst;
-//	}
-//	
-	
-	public List <Integer> getAllUnbookedAppointment(String dt, long acid){
-		System.out.println(dt);
-		List<Integer> lst = repositoryAE.getAllUnbookedAppointment(dt, acid);
-		List<Integer> newlst=new ArrayList<Integer>();
-		for(int i=0;i<8;i++) {
-			if(!lst.contains(i)) {
-				newlst.add(i);
+
+	public List<Integer> getAllUnbookedAppointment(LocalDate date, long acid)
+	{	
+		List<Integer> listBookedTimeSlots = repositoryAE.getAllUnbookedAppointmentOfSpecificDate(date, acid);	
+		List<Integer> listFreeTimeSlots = new ArrayList<Integer>();
+		
+		
+		for (int i = 0; i < 8; i++) 
+		{
+			if(!listBookedTimeSlots.contains(i)) 
+			{
+				listFreeTimeSlots.add(i);
 			}
 		}
-		return newlst;
+		return listFreeTimeSlots;
 	}
 		
 	

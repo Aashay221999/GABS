@@ -75,7 +75,7 @@ public class AppointmentCalendarController {
 	{
 		AppointmentEntry appointmentEntry = serviceAE.getAppointmentEntryById(aeID);
 		appointmentEntry.setIsApproved(true);
-		serviceAE.updateAppointmentEntry(appointmentEntry);
+		serviceAE.approveAppointmentEntry(appointmentEntry);
 		return "Appointment is Approved";
 	}
 	

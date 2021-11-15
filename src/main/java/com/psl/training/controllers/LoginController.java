@@ -11,21 +11,24 @@ import com.psl.training.entity.User;
 import com.psl.training.service.UserService;
 
 @RestController
-public class loginController {
+public class LoginController {
 	
 	@Autowired
 	UserService serviceU;
 
 
 	@PostMapping("/login")
-	public boolean AuhtenticateUser (@RequestBody Map<String, String> payload) throws Exception{ 
-		 String userName = payload.get("userName");
-		String password =payload.get("password"); 
+	public boolean auhtenticateUser (@RequestBody Map<String, String> payload) throws Exception{ 
+		String userName = payload.get("userName");
+		String password = payload.get("password"); 
 		User owner= serviceU.findByUserName(userName) ;
-		if(owner.getPassword()==password) {
+		if(owner.getPassword()==password) 
+		{
 			return true;
 		}
-		else {
+		else 
+		{
 			return false;
 		}
 	}
+}

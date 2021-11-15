@@ -21,13 +21,5 @@ public class RegistrationController {
 		serviceU.insertUser(user);
 		return "User Inserted";
 	}
-	
-	@GetMapping("/reg")
-	public String displayHello()
-	{
-		return "Hello";
-	}
-	
-
 }
 

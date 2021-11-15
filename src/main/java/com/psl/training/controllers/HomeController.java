@@ -2,11 +2,15 @@ package com.psl.training.controllers;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.psl.training.entity.AppointmentEntry;
+import com.psl.training.entity.User;
 import com.psl.training.service.AppointmentEntryService;
+import com.psl.training.service.UserService;
 
 @RestController
 public class HomeController {
@@ -15,24 +19,10 @@ public class HomeController {
 	@Autowired
 	AppointmentEntryService serviceAE;
 	
-	@GetMapping("/ome")
-	public String Home() {
-		return "hello world";
-	}
+	@GetMapping("/home/{userID}")
+	public List<AppointmentEntry> getAppointmentEntryByOwner(@PathVariable("userID") long userID){
 	
-	
-//	
-//	@GetMapping("/home/{aeid}")
-//	public AppointmentEntry getAppointmentEntryById(@RequestBody long aeid ){
-//		return serviceAE.getAppointmentEntryById(aeid);
-//	}
-//}
-	
-	
-	
-	@GetMapping("/home/{aeid}")
-	public AppointmentEntry getAppointmentEntryById(@PathVariable("aeid") long aeid){
-		return serviceAE.getAppointmentEntryById(aeid);
+		return serviceAE.getAppointmentEntryByOwner(userID);
 	}
 }
 	

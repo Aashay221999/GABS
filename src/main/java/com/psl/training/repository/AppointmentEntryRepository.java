@@ -30,8 +30,8 @@ public interface AppointmentEntryRepository extends JpaRepository<AppointmentEnt
 //	public List<Integer> getAppointmentEntryByNameDate(LocalDate date, long acid);
 //	
 	
-	@Query(value= "select time_slot from appointment_entries where description=?1 and acid=?2 ",nativeQuery=true)
-	public List<Integer> getAllUnbookedAppointment(String description, long acid);
+	@Query(value= "select time_slot from appointment_entries where date=?1 and acid=?2 ",nativeQuery=true)
+	public List<Integer> getAllUnbookedAppointmentOfSpecificDate(LocalDate date, long acid);
 	
 	
 }
