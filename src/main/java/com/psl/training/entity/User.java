@@ -30,7 +30,7 @@ public class User implements Serializable {
 		@Column(nullable = false)
 		private String mobileNumber;
 		
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		@Column(nullable = false)
 		private LocalDate DoB;
 		

@@ -26,6 +26,13 @@ public class UserController {
 		return serviceU.findByUserID(userID);
 	}
 	
+	@GetMapping("/users/{userName}")
+	public User getUserDetailsByName(@PathVariable("userName") String username)
+	{
+		return serviceU.findByUserName(username);
+	}
+	
+	
 	@PutMapping("/user/{userID}")
 	public String updateUser(@RequestBody User user)
 	{

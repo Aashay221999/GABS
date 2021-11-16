@@ -31,7 +31,7 @@ public class AppointmentEntry implements Serializable {
 	private AppointmentCalendar appointmentCalendar;
 	
 	@Column(name = "acID", insertable = false, updatable=false, nullable = false)
-	private String appointmentCalendarID;
+	private Long appointmentCalendarID;
 	
 	@JsonBackReference(value="myOwnedAe")
 	@ManyToOne
@@ -41,7 +41,7 @@ public class AppointmentEntry implements Serializable {
 	@Column(name = "owner_id", insertable = false, updatable=false, nullable = false)
 	private String ownerid;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	@Column(nullable = false)
 	private LocalDate date;
 	
@@ -80,11 +80,11 @@ public class AppointmentEntry implements Serializable {
 		this.description = description;
 	}
 
-	public String getAppointmentCalendarID() {
+	public Long getAppointmentCalendarID() {
 		return appointmentCalendarID;
 	}
 
-	public void setAppointmentCalendarID(String appointmentCalendarID) {
+	public void setAppointmentCalendarID(Long appointmentCalendarID) {
 		this.appointmentCalendarID = appointmentCalendarID;
 	}
 	

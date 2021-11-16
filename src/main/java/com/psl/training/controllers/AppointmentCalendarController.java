@@ -70,7 +70,7 @@ public class AppointmentCalendarController {
 		return serviceAE.getSpecificAppointmentEntry(acID, false);
 	}
 
-	@PutMapping("ac/{acID}/approve/{aeID}")
+	@PutMapping("ac/ae/approve/{aeID}")
 	public String approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		AppointmentEntry appointmentEntry = serviceAE.getAppointmentEntryById(aeID);

@@ -33,9 +33,8 @@ public class BookController {
 
 	
 	
-	@GetMapping("/book/{acid}")
-	public List<Integer> getAllUnbookedAppointment(@RequestBody Map<String, String> payload, @PathVariable("acid") long acid){
-		String stringDate = payload.get("date");
+	@GetMapping("/book/{acid}/{date}")
+	public List<Integer> getAllUnbookedAppointment(@PathVariable("acid") long acid,@PathVariable("date") String stringDate){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDate localDate = LocalDate.parse(stringDate, formatter);
 		return serviceAE.getAllUnbookedAppointment(localDate, acid);
@@ -54,12 +53,10 @@ public class BookController {
 		return serviceAE.insertAppointmentEntry(appointmentEntry);
 	}
 	
-	@GetMapping("/book")
-	public List<AppointmentCalendar> getAppointmentCalendarsBySearch(@RequestBody Map<String,String> payload)
+	@GetMapping("/book/{searchText}/{searchCriteria}")
+	public List<AppointmentCalendar> getAppointmentCalendarsBySearch(@PathVariable("searchText") String searchText,@PathVariable("searchCriteria") String searchCriteria )
 	{
-		String searchText = payload.get("searchText");
-		String searchCriteria = payload.get("searchCriteria"); //can by Location, Type, Owner
-		
+		//searchCriteria can by Location, Type, Owner
 		if (searchCriteria == "Location")
 		{
 			return serviceAC.getAppointmentCalendarByLocation(searchText);
