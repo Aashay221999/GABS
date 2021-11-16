@@ -26,7 +26,7 @@ public class AppointmentEntryController {
 	UserService serviceU;
 	
 	@PostMapping("/book/{appointeeID}/{acID}/createaeform")
-	public String insertAppointmentEntry(@RequestBody AppointmentEntry appointmentEntry, @PathVariable("acID") long acID, @PathVariable("appointeeID") long appointeeID)
+	public boolean insertAppointmentEntry(@RequestBody AppointmentEntry appointmentEntry, @PathVariable("acID") long acID, @PathVariable("appointeeID") long appointeeID)
 	{
 		AppointmentCalendar appointmentCalendar = serviceAC.getAppointmentCalendarById(acID);
 		appointmentEntry.setAppointmentCalendar(appointmentCalendar);
@@ -39,7 +39,7 @@ public class AppointmentEntryController {
 		
 		
 		serviceAE.insertAppointmentEntry(appointmentEntry);
-		return "Appointment Entry Inserted";
+		return true;
 	}
 	
 	

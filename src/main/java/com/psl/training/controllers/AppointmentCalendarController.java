@@ -32,13 +32,13 @@ public class AppointmentCalendarController {
 	UserService serviceU;
 	
 	@PostMapping("/ac/{userID}/createacform")
-	public String insertAppointmentCalendar(@RequestBody AppointmentCalendar appointmentCalendar, @PathVariable("userID") long userID)
+	public boolean insertAppointmentCalendar(@RequestBody AppointmentCalendar appointmentCalendar, @PathVariable("userID") long userID)
 	{
 		User owner = serviceU.findByUserID(userID);
 		appointmentCalendar.setOwner(owner);
 		System.out.println(appointmentCalendar.getOwner().getUserID());
 		serviceAC.insertAppointmentCalendar(appointmentCalendar);
-		return "Appoinment Calendar Inserted";
+		return true;
 	}
 	
 	@GetMapping("/ac/{userID}")
