@@ -31,8 +31,6 @@ public class BookController {
 	@Autowired
 	UserService serviceU;
 
-	
-	
 	@GetMapping("/book/{acid}/{date}")
 	public List<Integer> getAllUnbookedAppointment(@PathVariable("acid") long acid,@PathVariable("date") String stringDate){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -42,15 +40,20 @@ public class BookController {
 	
 	
 	
-	@PostMapping("/book/{userID}/{acID}}/createaeform")
-	public AppointmentEntry createAppointment(@RequestBody AppointmentEntry appointmentEntry , @PathVariable("acID") long acID, @PathVariable("userID") long userID){
+	@PostMapping("/book/{userID}/{acID}/createaeform/{stringDate}")
+	public boolean createAppointment(@RequestBody AppointmentEntry appointmentEntry , @PathVariable("acID") long acID, @PathVariable("userID") long userID, @PathVariable("stringDate") String stringDate){
 		AppointmentCalendar appointmentCalendar = serviceAC.getAppointmentCalendarById(acID);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.parse(stringDate, formatter);
+		System.out.println(localDate);
 		User appointee = serviceU.findByUserID(userID);
+		appointmentEntry.setAppointmentCalendar(appointmentCalendar);
 		appointmentEntry.setAppointee(appointee);
 		appointmentEntry.setOwner(appointmentCalendar.getOwner());
+		appointmentEntry.setDate(localDate);
+		serviceAE.insertAppointmentEntry(appointmentEntry);
 		
-		
-		return serviceAE.insertAppointmentEntry(appointmentEntry);
+		return true;
 	}
 	
 	@GetMapping("/book/{searchText}/{searchCriteria}")
