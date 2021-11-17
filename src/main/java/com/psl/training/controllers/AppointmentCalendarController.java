@@ -58,6 +58,12 @@ public class AppointmentCalendarController {
 		return "Delete Appointment Calendar";
 	}
 	
+	@GetMapping("ac/appEL/{acid}")
+	public List<AppointmentEntry> getAppointmentEntitiesByAcID(@PathVariable("acid") long acID)
+	{
+		return serviceAE.getAppointmentEntryByACID(acID);
+	}
+	
 	@GetMapping("ac/{acid}/approved")
 	public List<AppointmentEntry> getApprovedAppointmentEntitiesByAcID(@PathVariable("acID") long acID)
 	{
@@ -71,19 +77,19 @@ public class AppointmentCalendarController {
 	}
 
 	@PutMapping("ac/ae/approve/{aeID}")
-	public String approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
+	public boolean approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		AppointmentEntry appointmentEntry = serviceAE.getAppointmentEntryById(aeID);
 		appointmentEntry.setIsApproved(true);
 		serviceAE.approveAppointmentEntry(appointmentEntry);
-		return "Appointment is Approved";
+		return true;
 	}
 	
 	@DeleteMapping("ac/{acID}/reject/{aeID}")
-	public String rejectAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
+	public boolean rejectAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		serviceAE.deleteAppointmentEntryById(aeID);
-		return "Appointment Entry is Deleted";
+		return true;
 	}
 	
 }

@@ -38,6 +38,8 @@ public class AppointmentEntryService {
 		
 		return repositoryAE.findSpecificAppointmentEntry(acID,isApproved);
 	}
+	
+	
 
 	public List<AppointmentEntry> getAppointmentEntry() { // Checking if everything is working
 		return repositoryAE.findAll();
@@ -47,6 +49,14 @@ public class AppointmentEntryService {
 	{
 		//return new object which is not found
 		return repositoryAE.findById(aeID).orElseThrow(IllegalArgumentException::new);
+		
+	}
+	
+	public List<AppointmentEntry> getAppointmentEntryByACID(long acID)
+	{
+		//return new object which is not found
+		AppointmentCalendar appC = repositoryAC.getById(acID);
+		return repositoryAE.findByAppointmentCalendar(appC);
 		
 	}
 	

@@ -45,12 +45,14 @@ public class BookController {
 		AppointmentCalendar appointmentCalendar = serviceAC.getAppointmentCalendarById(acID);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.parse(stringDate, formatter);
-		System.out.println(localDate);
+		
 		User appointee = serviceU.findByUserID(userID);
 		appointmentEntry.setAppointmentCalendar(appointmentCalendar);
 		appointmentEntry.setAppointee(appointee);
 		appointmentEntry.setOwner(appointmentCalendar.getOwner());
 		appointmentEntry.setDate(localDate);
+		System.out.println(localDate);
+		System.out.println(appointmentEntry.getTimeSlot());
 		serviceAE.insertAppointmentEntry(appointmentEntry);
 		
 		return true;

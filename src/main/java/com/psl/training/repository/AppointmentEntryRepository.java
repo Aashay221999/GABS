@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.psl.training.entity.AppointmentCalendar;
 import com.psl.training.entity.AppointmentEntry;
 import com.psl.training.entity.User;
 
@@ -19,6 +20,8 @@ public interface AppointmentEntryRepository extends JpaRepository<AppointmentEnt
 //    public List<AppointmentEntry> getAppointmentByApointee(String appointee);
 	
 	public List<AppointmentEntry> findByOwner(User owner);
+	
+	public List<AppointmentEntry> findByAppointmentCalendar(AppointmentCalendar appC);
 	
 	public List<AppointmentEntry> findByAppointee(User apointee);
 

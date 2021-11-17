@@ -49,7 +49,7 @@ public class AppointmentEntry implements Serializable {
 	private Boolean isApproved;
 	
 	@Column(nullable = false)
-	private int timeSlot;
+	private long timeSlot;
 	
 	@JsonBackReference(value="myBookedAe")
 	@ManyToOne
@@ -68,7 +68,7 @@ public class AppointmentEntry implements Serializable {
 	}
 	
 	public AppointmentEntry(long aeID, AppointmentCalendar appointmentCalendar, User owner, LocalDate date,
-			Boolean isApproved, int timeSlot, User appointee, String description) {
+			Boolean isApproved, long timeSlot, User appointee, String description) {
 		super();
 		this.aeID = aeID;
 		this.appointmentCalendar = appointmentCalendar;
@@ -144,11 +144,11 @@ public class AppointmentEntry implements Serializable {
 		this.isApproved = isApproved;
 	}
 
-	public int getTimeSlot() {
+	public long getTimeSlot() {
 		return timeSlot;
 	}
 
-	public void setTimeSlot(int timeSlot) {
+	public void setTimeSlot(long timeSlot) {
 		this.timeSlot = timeSlot;
 	}
 
