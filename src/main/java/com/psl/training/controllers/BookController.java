@@ -62,18 +62,17 @@ public class BookController {
 	@GetMapping("/book/search/{searchText}/{searchCriteria}")
 	public List<AppointmentCalendar> getAppointmentCalendarsBySearch(@PathVariable("searchText") String searchText,@PathVariable("searchCriteria") String searchCriteria )
 	{
-		//searchCriteria can by Location, Type, Owner
-		if (searchCriteria == "Location")
+
+		if (searchCriteria.equals("Location"))
 		{
 			return serviceAC.getAppointmentCalendarByLocation(searchText);
 		}
-		else if (searchCriteria == "Type")
+		if (searchCriteria.equals("Type"))
 		{
 			return serviceAC.getAppointmentCalendarByType(searchText);
 		}
 		else 
 		{
-			//searchCriteria == User
 			return serviceAC.getAppointmentCalendarByUserName(searchText);
 		}
 	}
