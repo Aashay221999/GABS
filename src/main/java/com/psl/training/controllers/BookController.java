@@ -33,7 +33,7 @@ public class BookController {
 
 	@GetMapping("/book/{acid}/{date}")
 	public List<Integer> getAllUnbookedAppointment(@PathVariable("acid") long acid,@PathVariable("date") String stringDate){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.parse(stringDate, formatter);
 		return serviceAE.getAllUnbookedAppointment(localDate, acid);
 	}
@@ -43,6 +43,7 @@ public class BookController {
 	@PostMapping("/book/{userID}/{acID}/createaeform/{stringDate}")
 	public boolean createAppointment(@RequestBody AppointmentEntry appointmentEntry , @PathVariable("acID") long acID, @PathVariable("userID") long userID, @PathVariable("stringDate") String stringDate){
 		AppointmentCalendar appointmentCalendar = serviceAC.getAppointmentCalendarById(acID);
+		System.out.println(stringDate);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.parse(stringDate, formatter);
 		
@@ -58,7 +59,7 @@ public class BookController {
 		return true;
 	}
 	
-	@GetMapping("/book/{searchText}/{searchCriteria}")
+	@GetMapping("/book/search/{searchText}/{searchCriteria}")
 	public List<AppointmentCalendar> getAppointmentCalendarsBySearch(@PathVariable("searchText") String searchText,@PathVariable("searchCriteria") String searchCriteria )
 	{
 		//searchCriteria can by Location, Type, Owner
