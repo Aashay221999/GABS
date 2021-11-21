@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -45,16 +46,16 @@ public class User implements Serializable {
 		
 		@JsonManagedReference(value="myBookedAe")
 		//@JsonIgnoreProperties({"owner", "apointee"})
-		@OneToMany(mappedBy = "appointee")
+		@OneToMany(mappedBy = "appointee", cascade = CascadeType.REMOVE, orphanRemoval = true)
 		private Set<AppointmentEntry> appointmentEntries;
 		
 		@JsonManagedReference(value="myac")
 		//@JsonIgnoreProperties({"owner"})
-		@OneToMany(mappedBy = "owner")
+		@OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, orphanRemoval = true)
 		private Set<AppointmentCalendar> appointmentCalendars;
 		
 		@JsonManagedReference(value="myOwnedAe")
-		@OneToMany(mappedBy = "owner")
+		@OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, orphanRemoval = true)
 		private Set<AppointmentEntry> appointmentEntriesOwnedByMe;
 		
 		public  User() {

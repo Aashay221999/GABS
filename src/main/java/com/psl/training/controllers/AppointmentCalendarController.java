@@ -51,11 +51,11 @@ public class AppointmentCalendarController {
 
 	}
 	
-	@DeleteMapping("ac/{acid}")
-	public String deleteAppointmentCalendar(@PathVariable("acID") long acID)
+	@DeleteMapping("ac/{acID}")
+	public boolean deleteAppointmentCalendar(@PathVariable("acID") long acID)
 	{
 		serviceAC.deleteAppointmentCalendarById(acID);
-		return "Delete Appointment Calendar";
+		return true;
 	}
 	
 	@GetMapping("ac/appEL/{acid}")
@@ -85,7 +85,7 @@ public class AppointmentCalendarController {
 		return true;
 	}
 	
-	@DeleteMapping("ac/{acID}/reject/{aeID}")
+	@DeleteMapping("ac/reject/{aeID}")
 	public boolean rejectAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		serviceAE.deleteAppointmentEntryById(aeID);

@@ -34,9 +34,9 @@ public class UserController {
 	
 	
 	@PutMapping("/user/{userID}")
-	public String updateUser(@RequestBody User user)
+	public boolean updateUser(@RequestBody User user)
 	{
 		serviceU.updateUser(user);
-		return "User Updated Succesfully";
+		return true;
 	}
 }

@@ -17,14 +17,14 @@ public class AdminController {
 	@Autowired
 	UserService serviceU;
 	
-	@DeleteMapping("/admin/{userID}")
-	public String deleteUser(@PathVariable("userID") long userID)
+	@DeleteMapping("/admin/delete/{userID}")
+	public boolean deleteUser(@PathVariable("userID") long userID)
 	{
 		serviceU.deleteUserById(userID);
-		return "User Deleted Succesfully";
+		return true;
 	}
 	
-	@GetMapping("/admin")
+	@GetMapping("/admin/users")
 	public List<User> getUsers()
 	{
 		return serviceU.getAllUsers();

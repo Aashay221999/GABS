@@ -4,6 +4,7 @@ package com.psl.training.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class AppointmentCalendar implements Serializable {
 
 	@JsonManagedReference(value="myacae")
 	//@JsonIgnoreProperties({"owner", "apointee", "appointmentCalendar"})
-	@OneToMany(mappedBy = "appointmentCalendar")
+	@OneToMany(mappedBy = "appointmentCalendar", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Set<AppointmentEntry> listAppointmentEntries;
 	
 	
