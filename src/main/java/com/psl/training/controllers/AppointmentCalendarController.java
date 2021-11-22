@@ -52,7 +52,7 @@ public class AppointmentCalendarController {
 
 	}
 	
-	@DeleteMapping("ac/{acID}")
+	@PostMapping("ac/{acID}")
 	public boolean deleteAppointmentCalendar(@PathVariable("acID") long acID)
 	{
 		serviceAC.deleteAppointmentCalendarById(acID);
@@ -77,7 +77,7 @@ public class AppointmentCalendarController {
 		return serviceAE.getSpecificAppointmentEntry(acID, false);
 	}
 
-	@PutMapping("ac/ae/approve/{aeID}")
+	@PostMapping("ac/ae/approve/{aeID}")
 	public boolean approveAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		AppointmentEntry appointmentEntry = serviceAE.getAppointmentEntryById(aeID);
@@ -86,7 +86,7 @@ public class AppointmentCalendarController {
 		return true;
 	}
 	
-	@DeleteMapping("ac/reject/{aeID}")
+	@PostMapping("ac/reject/{aeID}")
 	public boolean rejectAppointmentEntryByAeID(@PathVariable("aeID") long aeID)
 	{
 		serviceAE.deleteAppointmentEntryById(aeID);
