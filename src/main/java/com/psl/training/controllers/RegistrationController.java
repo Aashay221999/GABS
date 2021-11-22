@@ -19,14 +19,14 @@ public class RegistrationController {
 	@Autowired
 	UserService serviceU;
 	
-	@PostMapping(value="/reg/{dateString}")
-	public boolean insertUser(@RequestBody User user, @PathVariable("dateString") String dateString)
-	{	
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate localDate = LocalDate.parse(dateString, formatter);
-		user.setDoB(localDate);
-		serviceU.insertUser(user);
-		return true;
-	}
+//	@PostMapping(value="/reg/{dateString}")
+//	public boolean insertUser(@RequestBody User user, @PathVariable("dateString") String dateString)
+//	{	
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//		LocalDate localDate = LocalDate.parse(dateString, formatter);
+//		user.setDoB(localDate);
+//		serviceU.insertUser(user);
+//		return true;
+//	}
 }
 

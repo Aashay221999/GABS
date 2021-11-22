@@ -35,10 +35,10 @@ public class AppointmentEntry implements Serializable {
 	
 	@JsonBackReference(value="myOwnedAe")
 	@ManyToOne
-	@JoinColumn(name="owner_id", nullable=false, insertable=true, updatable=false, referencedColumnName="username")
+	@JoinColumn(name="owner_name", nullable=false, insertable=true, updatable=false, referencedColumnName="username")
 	private User owner;
 
-	@Column(name = "owner_id", insertable = false, updatable=false, nullable = false)
+	@Column(name = "owner_name", insertable = false, updatable=false, nullable = false)
 	private String ownerid;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
@@ -53,10 +53,10 @@ public class AppointmentEntry implements Serializable {
 	
 	@JsonBackReference(value="myBookedAe")
 	@ManyToOne
-	@JoinColumn(name="apointee_id", nullable=false, referencedColumnName="username")
+	@JoinColumn(name="apointee_name", nullable=false, referencedColumnName="username")
 	private User appointee;
 	
-	@Column(name = "apointee_id", insertable = false, updatable=false, nullable = false)
+	@Column(name = "apointee_name", insertable = false, updatable=false, nullable = false)
 	private String apointeeid;
 
 	@Column(nullable = false)

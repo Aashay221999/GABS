@@ -56,7 +56,7 @@ public class AppointmentCalendarService {
 	}
 	
 	public List<AppointmentCalendar> getAppointmentCalendarByUserName (String  userName ) {
-		User owner = repositoryU.findByUserName(userName).get(0);
+		User owner = repositoryU.findByUsername(userName);
 		return repositoryAC.findByOwner(owner);
 	}
 	

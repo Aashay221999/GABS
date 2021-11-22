@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.psl.training"})
 @EntityScan(basePackages = {"com.psl.training"})
 @ComponentScan(basePackages = {"com.psl.training"})
 @EnableJpaRepositories(basePackages = {"com.psl.training"})

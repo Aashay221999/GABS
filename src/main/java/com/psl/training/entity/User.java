@@ -26,14 +26,14 @@ public class User implements Serializable {
 		private long userID;
 		
 		@Column(nullable = false)
-		private String userName;
+		private String username;
 		
 		@Column(nullable = false)
 		private String mobileNumber;
 		
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+
 		@Column(nullable = false)
-		private LocalDate DoB;
+		private String DoB;
 		
 		@Column(nullable = false)
 		private String email;
@@ -62,12 +62,12 @@ public class User implements Serializable {
 			
 		}
 
-		public User(long userID, String userName, String mobileNumber, LocalDate doB, String email, boolean isAdmin,
+		public User(long userID, String userName, String mobileNumber, String doB, String email, boolean isAdmin,
 				String password, Set<AppointmentEntry> appointmentEntries,
 				Set<AppointmentCalendar> appointmentCalendars,Set<AppointmentEntry> appointmentEntriesOwnedByMe) {
 			super();
 			this.userID = userID;
-			this.userName = userName;
+			this.username = userName;
 			this.mobileNumber = mobileNumber;
 			this.DoB = doB;
 			this.email = email;
@@ -96,13 +96,13 @@ public class User implements Serializable {
 		}
 
 
-		public String getUserName() {
-			return userName;
+		public String getUsername() {
+			return username;
 		}
 
 
-		public void setUserName(String userName) {
-			this.userName = userName;
+		public void setUsername(String userName) {
+			this.username = userName;
 		}
 
 
@@ -116,12 +116,12 @@ public class User implements Serializable {
 		}
 
 
-		public LocalDate getDoB() {
+		public String getDoB() {
 			return DoB;
 		}
 
 
-		public void setDoB(LocalDate doB) {
+		public void setDoB(String doB) {
 			DoB = doB;
 		}
 

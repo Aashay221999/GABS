@@ -49,7 +49,7 @@ public class UserController {
 		List<String> usernames = new ArrayList<String>();
 		for (User u : users)
 		{
-			usernames.add(u.getUserName());
+			usernames.add(u.getUsername());
 		}
 		return usernames; 
 	}

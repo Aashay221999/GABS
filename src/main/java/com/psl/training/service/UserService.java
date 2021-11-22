@@ -40,7 +40,7 @@ public class UserService {
 
 	public User findByUserName(String userName)
 	{
-		return repositoryU.findByUserName(userName).get(0);
+		return repositoryU.findByUsername(userName);
 	}
 	
 	public User findByUserID(long userID)

@@ -11,6 +11,6 @@ import com.psl.training.entity.User;
 @Repository
 public interface UserRepository  extends JpaRepository< User, Long> {
 
-	public List<User> findByUserName(String userName);
+	public User findByUsername(String userName);
 	
 }
