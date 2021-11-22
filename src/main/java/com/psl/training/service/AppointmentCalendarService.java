@@ -60,5 +60,9 @@ public class AppointmentCalendarService {
 		return repositoryAC.findByOwner(owner);
 	}
 	
+	public List<AppointmentCalendar> getAll()
+	{
+		return repositoryAC.findAll();
+	}
 	
 }

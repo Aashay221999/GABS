@@ -108,7 +108,10 @@ public class AppointmentEntryService {
 		}
 	}
 	
-	
+	public List<AppointmentEntry> getAll()
+	{
+		return repositoryAE.findAll();
+	}
 	
 	
 	

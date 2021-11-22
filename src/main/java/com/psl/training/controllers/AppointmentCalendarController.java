@@ -1,5 +1,6 @@
 package com.psl.training.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,4 +93,15 @@ public class AppointmentCalendarController {
 		return true;
 	}
 	
+	@GetMapping("/appointmentcalendars")
+	public List<Long> getAppCals()
+	{
+		List<AppointmentCalendar> appC = serviceAC.getAll();
+		List<Long> appCIDs = new ArrayList<Long>();
+		for (AppointmentCalendar u : appC)
+		{
+			appCIDs.add(u.getAcID());
+		}
+		return appCIDs; 
+	}
 }
